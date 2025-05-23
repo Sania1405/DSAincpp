@@ -105,6 +105,34 @@ int levelordersum(Node*root){
     }
     return result;
 }
+void levelordersum2(Node*root){
+    queue<Node*>q;
+    int result=0;
+    q.push(root);
+    q.push(NULL);
+    while(!q.empty()){
+        Node*curr=q.front();
+        q.pop();
+        if(curr==NULL){
+            cout<<result;
+            result=0;
+            cout<<endl;
+            if(q.empty()){
+                break;
+            }
+            q.push(NULL);
+        }else{
+            result+=curr->data;
+            // cout<<curr->data<<" "; 
+            if(curr->left!=NULL){
+                q.push(curr->left);
+            }
+            if(curr->right!=NULL){
+                q.push(curr->right);
+            }
+        }
+    }
+}
 int main(){
     vector<int>node={1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
     Node*root=buildtree(node);
@@ -126,5 +154,9 @@ int main(){
     levelorder2(root);
     cout<<"level order sum: ";
     cout<<levelordersum(root);
+    cout<<endl;
+    cout<<"level order sum node wise: ";
+    cout<<endl;
+    levelordersum2(root);
     return 0;
 }
