@@ -133,6 +133,33 @@ void levelordersum2(Node*root){
         }
     }
 }
+int heightoftree(Node*root){
+    if(root==NULL){
+        return 0;
+    }
+    int leftheight=heightoftree(root->left);
+    int rightheight=heightoftree(root->right);
+    int finalheight=max(leftheight,rightheight) + 1;
+    return finalheight;
+}
+int count(Node*root){
+    if(root==NULL){
+        return 0;
+    }
+    int leftcount=count(root->left);
+    int rightcount=count(root->right);
+    return leftcount+rightcount+1;
+}
+int sumofnodes(Node*root){
+    if(root==NULL){
+        return 0;
+    }
+    int leftsum=sumofnodes(root->left);
+    int rightsum=sumofnodes(root->right);
+    int currsumm=leftsum+rightsum+root->data;
+    cout<<"current sum: "<<currsumm<<endl;
+    return currsumm;
+}
 int main(){
     vector<int>node={1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
     Node*root=buildtree(node);
@@ -158,5 +185,11 @@ int main(){
     cout<<"level order sum node wise: ";
     cout<<endl;
     levelordersum2(root);
+    cout<<endl;
+    cout<<"height of tree: "<<heightoftree(root);
+    cout<<endl;
+    cout<<"count of nodes: "<<count(root);
+    cout<<endl;
+    sumofnodes(root);
     return 0;
 }
